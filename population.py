@@ -1,14 +1,14 @@
 import math, random
 
 class population:
-    def __init__(self, nombre_infectes, nombre_susceptibles, nombre_total=None):
+    def __init__(self, nombre_infectes: int, nombre_susceptibles: int) -> None:
         self.nombre_infectes = nombre_infectes
         self.nombre_susceptibles = nombre_susceptibles
         self.infectes = {}
         self.susceptibles = {}
         self.direction = {"1": [0, 1], "2": [round(math.sqrt(2), 1)/2, round(math.sqrt(2), 1)/2], "3": [1, 0], "4": [round(math.sqrt(2), 1)/2, -(round(math.sqrt(2), 1)/2)], "5": [0, -1], "6": [-(round(math.sqrt(2), 1)/2), -(round(math.sqrt(2), 1)/2)], "7": [-1, 0], "8": [-(round(math.sqrt(2), 1)/2), round(math.sqrt(2), 1)/2]}
 
-    def creer_population(self, environnement, taille, direction=None):
+    def creer_population(self, environnement: 'pygame.Rect object', taille: int, direction: "1->8" = None) -> None:
         count1 = 0
         for _ in range(self.nombre_infectes):
             x = random.randint(environnement[0]+taille, environnement[2]+environnement[0]-taille)
