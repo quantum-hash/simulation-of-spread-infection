@@ -3,7 +3,7 @@ import random
 class citoyen:
     les_couleurs = {"I":(245, 55, 10), "NI":(20, 235, 95), "MG":(225, 225, 225)}
 
-    def __init__(self, id, x_pos, y_pos, direction, etat, taille, fenetre, environnement, couleur=None, nom=None, sexe=None, age=None, vaccine=None, masque=None, perimetre=None):
+    def __init__(self, id: str, x_pos: int, y_pos: int, direction: list, etat: "I" or "NI" or "MG", taille: int, fenetre: "window.fenetre object", environnement: 'pygame.Rect object', couleur=None, nom=None, sexe=None, age=None, vaccine=None, masque=None, perimetre=None) -> None:
         self.id = id
         self.x = x_pos
         self.y = y_pos
@@ -41,9 +41,9 @@ class citoyen:
         gue = 500
         self.guerison =  random.randint(gue-30,gue+30)
         self.vie = 50
-    def bouger (self, vitesse = 1):
+    def bouger (self, vitesse: int = 1) -> None:
 
-        def changer_de_direction(x, y, env, taille, direction):
+        def changer_de_direction(x: int, y: int, env: 'pygame.Rect object', taille: int, direction: list) -> None:
             if x < env[0]+taille+10 or x > env[2]+env[0]-taille-10 :
                 old = direction[0]
                 if direction[1] == 0:
@@ -74,7 +74,7 @@ class citoyen:
             self.y += self.direction[1]*vitesse
 
 
-    def verifier_contamination(self, contamine_x, contamine_y, perimetre, vaccin=False, masque=False):
+    def verifier_contamination(self, contamine_x: int, contamine_y: int, perimetre: int, vaccin: bool = False, masque: bool = False) -> None:
         calcul = (((contamine_x-self.x)**2 + (contamine_y-self.y)**2))**0.5  # racine carre de (carre de (xb-xa) + carre de (yb-ya))
         if calcul <= perimetre*3:
             # Si la personne est trop proche, on devient infecte
@@ -100,7 +100,7 @@ class citoyen:
             elif self.perimetre <= 15:
                 self.animation_perimetre = [self.perimetre, self.perimetre*2]
 
-    def verifier_guerison (self):
+    def verifier_guerison (self) -> None:
         if self.etat == 'I':
             self.guerison -= 1
             if self.guerison == 0:
@@ -108,14 +108,14 @@ class citoyen:
                 self.couleur = self.les_couleurs["MG"]
                 self.perimetre = None
 
-    def se_vacciner (self, pourcentage=42): #  AstraZeneca ==>  34 %,   Pfizer ==>  50 %,   Moyenne des deux vaccins ==>  42 %
+    def se_vacciner (self, pourcentage: "0 <= int <= 100" = 42) -> None: #  AstraZeneca ==>  34 %,   Pfizer ==>  50 %,   Moyenne des deux vaccins ==>  42 %
         cc = random.randint(1,100)
         if cc > pourcentage:
             self.contamination = True
         # else:
         #     print(cc, self.id)
 
-    def porter_le_masque (self, pourcentage=25): #  ≈25%, source : https://www.quebecscience.qc.ca/sante/efficacite-masque-recentes-etudes/
+    def porter_le_masque (self, pourcentage: "0 <= int <= 100" = 25) -> None: #  ≈25%, source : https://www.quebecscience.qc.ca/sante/efficacite-masque-recentes-etudes/
         cc = random.randint(1,100)
         if cc > pourcentage:
             self.contamination = True
