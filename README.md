@@ -1,7 +1,7 @@
 # simulation-of-spread-infection
 Simulation of the spread of a disease.
 
-``The idea is to develop a computer simulation of the spread of the virus, a graphical interface simulating individuals moving randomly through an environment.`` 
+``This a computer simulation of the spread of a virus, a graphical interface simulating individuals moving randomly through an environment and more.`` 
 
 # graphic interface
 ![interface](https://user-images.githubusercontent.com/96754248/174905795-b383c38c-6324-4ef0-83c5-05f5676be3b5.gif)
